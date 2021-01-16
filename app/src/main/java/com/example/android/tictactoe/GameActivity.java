@@ -3,11 +3,8 @@ package com.example.android.tictactoe;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.Toast;
 
 public class GameActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -15,7 +12,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     private final int w = 3;
     private Button[][] board = new Button[h][w];
     private int turn = 0;
-    private Button btnRestart ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +27,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
 
-        btnRestart = findViewById(R.id.button_Restart);
+        Button btnRestart = findViewById(R.id.button_Restart);
         btnRestart.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -45,8 +41,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        String string = new String();
-        String player = new String();
+        String string;
+        String player;
         if ((++turn) % 2 != 0) {
             string = "0";
             player = "Player1";
@@ -63,27 +59,22 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void draw(){
-        StringBuffer buffer = new StringBuffer();
-        buffer.append("!Both Are You Play Well!\n");
-
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(true);
         builder.setTitle("!!DRAW!!");
-        builder.setMessage(buffer.toString());
+        builder.setMessage("!Both Are You Play Well!\n");
         builder.show();
         restartGame();
     }
 
     public void victoryMessage(String player){
-        StringBuffer buffer = new StringBuffer();
-        buffer.append(" " + player + "\n");
-        buffer.append("You Are The Winner!!\n");
-        buffer.append("\n\nPress RESTART for play Again\n");
-
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(true);
         builder.setTitle("!!Congratulation!!");
-        builder.setMessage(buffer.toString());
+        String buffer = " " + player + "\n" +
+                "You Are The Winner!!\n" +
+                "\n\nPress RESTART for play Again\n";
+        builder.setMessage(buffer);
         builder.show();
     }
 
@@ -98,33 +89,33 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     public boolean CheckForVictory(String string) {
         for (int i = 0; i < h; i++) {
             for (int j = 0; j < w - 2; j++) {
-                if (board[i][j].getText().toString() == board[i][j + 1].getText().toString()
-                        && board[i][j + 1].getText().toString() == board[i][j + 2].getText().toString()
-                        && board[i][j].getText().toString() == string)
+                if (board[i][j].getText().toString().equals(board[i][j + 1].getText().toString())
+                        && board[i][j + 1].getText().toString().equals(board[i][j + 2].getText().toString())
+                        && board[i][j].getText().toString().equals(string))
                     return true;
             }
         }
         for (int j = 0; j < w; j++) {
             for (int i = 0; i < h - 2; i++) {
-                if (board[i][j].getText().toString() == board[i + 1][j].getText().toString()
-                        && board[i + 2][j].getText().toString() == board[i + 1][j].getText().toString()
-                        && board[i + 1][j].getText().toString() == string)
+                if (board[i][j].getText().toString().equals(board[i + 1][j].getText().toString())
+                        && board[i + 2][j].getText().toString().equals(board[i + 1][j].getText().toString())
+                        && board[i + 1][j].getText().toString().equals(string))
                     return true;
             }
         }
         for (int i = 0; i < h - 2; i++) {
             for (int j = 0; j < w - 2; j++) {
-                if (board[i][j].getText().toString() == board[i][j].getText().toString()
-                        && board[i + 1][j + 1].getText().toString() == board[i][j].getText().toString()
-                        && board[i + 2][j + 2].getText().toString() == string)
+                if (board[i][j].getText().toString().equals(board[i][j].getText().toString())
+                        && board[i + 1][j + 1].getText().toString().equals(board[i][j].getText().toString())
+                        && board[i + 2][j + 2].getText().toString().equals(string))
                     return true;
             }
         }
         for (int i = 2; i < h; i++) {
             for (int j = 0; j < w - 2; j++) {
-                if (board[i][j].getText().toString() == board[i - 1][j + 1].getText().toString()
-                        && board[i - 1][j + 1].getText().toString() == board[i - 2][j + 2].getText().toString()
-                        && board[i - 2][j + 2].getText().toString() == string)
+                if (board[i][j].getText().toString().equals(board[i - 1][j + 1].getText().toString())
+                        && board[i - 1][j + 1].getText().toString().equals(board[i - 2][j + 2].getText().toString())
+                        && board[i - 2][j + 2].getText().toString().equals(string))
                     return true;
             }
         }

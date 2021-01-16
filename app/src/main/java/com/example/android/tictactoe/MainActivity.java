@@ -7,17 +7,14 @@ import android.view.View;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
-
-    private Button playbtn;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        playbtn = findViewById(R.id.button_Play);
+        Button playButton = findViewById(R.id.button_Play);
 
-        playbtn.setOnClickListener(
+        playButton.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
